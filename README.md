@@ -1,6 +1,6 @@
 # Poucet
 
-**TODO: Add description**
+**Very simple tool to get the final destination of a potential redirects URL. Based on HTTPotion.**
 
 ## Installation
 
