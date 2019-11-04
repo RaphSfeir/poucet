@@ -14,6 +14,17 @@ def deps do
   ]
 end
 ```
+## Usage
+
+```elixir
+iex> Poucet.final_location("https://t.co/2m6SRbn6or")
+{:ok,
+ "https://www.eurogamer.net/articles/2019-11-04-londons-pokemon-center-is-running-out-of-its-exclusive-top-hat-pikachus"}
+
+iex> Poucet.final_location("https://github.com/404")
+{:error, 404}
+
+```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
