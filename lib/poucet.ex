@@ -3,11 +3,6 @@ defmodule Poucet do
   Simple module to get call an URL and if it redirects, chain call it's redirection targets all the way to the final target, or in case of redirect loop, the limit is reached.
   """
 
-  @doc """
-
-  ## Examples
-  """
-
   @headers_browser [
     {"Accept",
      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"},
