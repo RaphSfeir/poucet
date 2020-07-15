@@ -54,8 +54,13 @@ defmodule Poucet do
     end
   end
 
-  defp try_redirect(location, count) when count >= 10 do
+  defp try_redirect(url, location = "http" <> _, count) when count >= 10 do
     location
+  end
+
+  # too many redirects but final lcoation is relative
+  defp try_redirect(url, location = "/" <> _, count) when count >= 10 do
+    {:error, :too_many_redirects}
   end
 
   def final_location(url) do
@@ -75,7 +80,13 @@ defmodule Poucet do
       when status_code >= 300 ->
         redirect_location = headers |> extract_location_header
         final_location = try_redirect(url, redirect_location, 0)
-        {:ok, final_location}
+
+        case try_redirect(url, redirect_location, 0) do
+          {:error, err} ->
+            {:error, err}
+          final_location ->
+            {:ok, final_location}
+        end
 
       {:ok,
        %HTTPoison.Response{
