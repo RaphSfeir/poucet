@@ -84,6 +84,7 @@ defmodule Poucet do
         case try_redirect(url, redirect_location, 0) do
           {:error, err} ->
             {:error, err}
+
           final_location ->
             {:ok, final_location}
         end
