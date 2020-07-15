@@ -21,7 +21,15 @@ defmodule Poucet do
     end
   end
 
-  defp try_redirect(location = "http" <> _, count) when count < 10 do
+  defp try_redirect(url = "http" <> _, location = "/" <> _, count) when count < 10 do
+    try_redirect(url, url <> location, count)
+  end
+
+  defp try_redirect(url, location = "/" <> _, count) when count < 10 do
+    try_redirect(url, "http://" <> url <> location, count)
+  end
+
+  defp try_redirect(url, location = "http" <> _, count) when count < 10 do
     case HTTPoison.get(location, @headers_browser,
            follow_redirect: false,
            ssl: [{:versions, [:"tlsv1.2"]}]
@@ -33,7 +41,7 @@ defmodule Poucet do
        }}
       when status_code >= 300 and status_code <= 305 ->
         new_location = extract_location_header(headers)
-        try_redirect(new_location, count + 1)
+        try_redirect(url, new_location, count + 1)
 
       {:ok,
        %HTTPoison.Response{
@@ -66,7 +74,7 @@ defmodule Poucet do
        }}
       when status_code >= 300 ->
         redirect_location = headers |> extract_location_header
-        final_location = try_redirect(redirect_location, 0)
+        final_location = try_redirect(url, redirect_location, 0)
         {:ok, final_location}
 
       {:ok,
