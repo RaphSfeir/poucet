@@ -54,6 +54,10 @@ defmodule Poucet do
     end
   end
 
+  defp try_redirect(url, location, count) when count < 10 do
+    try_redirect(url, "http://" <> url <> "/" <> location, count)
+  end
+
   defp try_redirect(_url, location = "http" <> _, count) when count >= 10 do
     location
   end

@@ -4,7 +4,7 @@ defmodule Poucet.MixProject do
   def project do
     [
       app: :poucet,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -41,7 +41,7 @@ defmodule Poucet.MixProject do
 
   defp deps do
     [
-      {:httpoison, "~> 1.6"},
+      {:httpoison, "~> 1.7"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
