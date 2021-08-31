@@ -41,7 +41,7 @@ defmodule Poucet.MixProject do
 
   defp deps do
     [
-      {:httpoison, "~> 1.7"},
+      {:httpoison, "~> 1.8"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end

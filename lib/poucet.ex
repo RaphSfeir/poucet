@@ -29,6 +29,9 @@ defmodule Poucet do
     try_redirect(url, "http://" <> url <> location, count)
   end
 
+  defp try_redirect(url, "https:///" <> rest, count),
+    do: try_redirect(url, "https://" <> rest, count)
+
   defp try_redirect(url, location = "http" <> _, count) when count < 10 do
     case HTTPoison.get(location, @headers_browser,
            follow_redirect: false,
