@@ -15,4 +15,9 @@ defmodule PoucetTest do
     assert Poucet.final_location("legendra.com") ==
              {:ok, "https://www.legendra.com/rpg/accueil.html"}
   end
+
+  test "Test 203 Status code" do
+    assert Poucet.final_location("tvshowtube.cf") ==
+             {:ok, "tvshowtube.cf"}
+  end
 end

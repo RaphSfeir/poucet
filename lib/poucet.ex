@@ -101,6 +101,13 @@ defmodule Poucet do
        }} ->
         {:ok, url}
 
+      {:ok,
+       %HTTPoison.Response{
+         status_code: code
+       }}
+      when code >= 200 and code <= 226 ->
+        {:ok, url}
+
       {:error, error} ->
         {:error, error}
     end
